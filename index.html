@@ -4,57 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <button id="rockButton" onclick="getPlayerChoice('Rock')">Rock</button>
-    <button id="paperButton" onclick="getPlayerChoice('Paper')">Paper</button>
-    <button id="scissorsButton" onclick="getPlayerChoice('Scissors')">Scissors</button>
-    <script>
-        let playerChoice = '';
-        let playerScore = 0;
-        let computerScore = 0;
-        let count = 0;
+    <button id="rockButton">Rock</button>
+    <button id="paperButton">Paper</button>
+    <button id="scissorsButton">Scissors</button>
 
-        function getComputerChoice() {
-            let choices = ['Rock', 'Paper', 'Scissors'];
-            return choices[Math.floor(Math.random() * choices.length)];
-        }
-
-        function getPlayerChoice(choice) {
-            playerChoice = choice;
-            game();
-        }
-
-        function game() {
-            if (count == 5) {
-                if (playerScore > computerScore) {
-                    console.log('You won the game!!!')
-                }
-                else console.log('You lost the game! :(')
-            }
-            else {
-                console.log(playRound(playerChoice, getComputerChoice()));
-            }
-
-        }
-
-        function playRound(playerChoice, computerChoice) {
-            if (playerChoice == computerChoice) {
-                return 'Tie! Play again!';
-            } else if (playerChoice == 'Rock' && computerChoice == 'Scissors' || 
-                        playerChoice == 'Paper' && computerChoice == 'Rock' || 
-                        playerChoice == 'Scissors' && computerChoice == 'Paper') {
-                playerScore++;
-                count++
-                return 'You won this round! ' + playerChoice + ' beats ' + computerChoice;
-            }
-            else {
-                computerScore++;
-                count++
-                return 'You lost this round! ' + computerChoice + ' beats ' + playerChoice;
-            }
-        }
-    </script>
-    
+    <div id="results">
+        <p id="playerScore">Player: 0</p>
+        <p id="computerScore">Computer: 0</p>
+    </div>
 </body>
 </html>
