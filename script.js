@@ -1,21 +1,20 @@
-let playerChoice = '';
-        let playerScore = 0;
-        let computerScore = 0;
-        let count = 0;
-
-        // getInnerText not working
-        // need to add uipdate to player score
+        let playerChoice = '';
+        let pScore = 0;
+        let cScore = 0;
 
         const btn = document.querySelectorAll('button');
-        btn.forEach((button) => {
-            button.addEventListener('click', getPlayerChoice(button.innerText()))
-        });
-
         const container = document.querySelector('#results');
-
         const round = document.createElement('p');
+        const winner = document.createElement('h2');
+        const playerScore = document.querySelector('#playerScore')
+        const computerScore = document.querySelector('#computerScore')
+        winner.classList.add('winner');
         round.classList.add('round');
-        round.appendChild(container);
+        container.appendChild(round);
+
+        btn.forEach((button) => {
+            button.addEventListener('click', () => getPlayerChoice(button.textContent));
+        });
 
         function getComputerChoice() {
             let choices = ['Rock', 'Paper', 'Scissors'];
@@ -28,17 +27,15 @@ let playerChoice = '';
         }
 
         function game() {
-            if (playerScore == 5 || computerScore == 5) {
-                const winner = document.createElement('h2');
-                winner.classList.add('winner');
-                if (playerScore > computerScore) {
+            if (pScore == 5 || cScore == 5) {
+                if (pScore > cScore) {
                     winner.textContent = "You won the game!!!";
                 }
                 else winner.textContent = "You lost the game :(";
                 container.appendChild(winner);
             }
             else {
-                round.textContent(playRound(playerChoice, getComputerChoice()));
+                round.textContent = (playRound(playerChoice, getComputerChoice()));
             }
         }
 
@@ -48,13 +45,13 @@ let playerChoice = '';
             } else if (playerChoice == 'Rock' && computerChoice == 'Scissors' || 
                         playerChoice == 'Paper' && computerChoice == 'Rock' || 
                         playerChoice == 'Scissors' && computerChoice == 'Paper') {
-                playerScore++;
-                count++
+                pScore++;
+                playerScore.textContent = 'Player: ' + pScore;
                 return 'You won this round! ' + playerChoice + ' beats ' + computerChoice;
             }
             else {
-                computerScore++;
-                count++
+                cScore++;
+                computerScore.textContent = 'Computer: ' + cScore;            
                 return 'You lost this round! ' + computerChoice + ' beats ' + playerChoice;
             }
         }
